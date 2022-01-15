@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { HighlightCard } from "../../components/HighlightCar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { useFocusEffect } from "@react-navigation/native";
 import {
   TransactionCard,
   TransactionCardProps,
@@ -36,14 +38,17 @@ export function Dashboard() {
     const response = await AsyncStorage.getItem(dataKey);
     const transactions = response ? JSON.parse(response) : [];
 
+
+    
     const transactionsFormatted: DataListProps[] = transactions.map(
       (item: DataListProps) => {
         const amount = Number(item.amount).toLocaleString("pt-BR", {
           style: "currency",
           currency: "BRL",
         });
- 
-        const date = Intl.DateTimeFormat("pt-BR", {
+
+      
+        const dateFormatted = Intl.DateTimeFormat("pt-BR", {
           day: "2-digit",
           month: "2-digit",
           year: "2-digit"
@@ -52,23 +57,30 @@ export function Dashboard() {
         return{
           id:item.id,
           name:item.name,
-          amount,
+          amount:amount,// LEMBRA QUE FORMATEI ELE
           type:item.type,
           category:item.category,
-          date:item.date,
+          date:dateFormatted,//LEMBRA QUE FORMATEI ELE
         }
       });
 
     setData(transactionsFormatted);
-
     console.log(transactionsFormatted);
+    
+
+   
     
   }
 
   useEffect(() => {
-    
     loadTransactions();
+
   }, []);
+
+  useFocusEffect(useCallback(()=>{
+    loadTransactions();
+  },[]));
+
 
   return (
     <Container>
