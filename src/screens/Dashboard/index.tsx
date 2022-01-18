@@ -150,7 +150,7 @@ export function Dashboard() {
       },
     });
 
-    console.log(transactionsFormatted);
+   
     setIsLoading(false);
   }
 

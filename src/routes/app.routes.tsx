@@ -6,6 +6,7 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 import { Dashboard } from "../screens/Dashboard";
 import { Register } from "../screens/Register";
+import { Resume } from "../screens/Resume";
 import { useTheme } from "styled-components";
 
 export function AppRoutes() {
@@ -46,7 +47,7 @@ export function AppRoutes() {
         }}
       />
 
-      <Screen name="Registro" component={Register}
+      <Screen name="Resumo" component={Resume}
       
       options={{
         tabBarIcon:(({size, color})=>
