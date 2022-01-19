@@ -21,7 +21,7 @@ export function HistoryCard(
   }:Props){
 
     return(
-        <Container color="red">
+        <Container color={color}>
             <Title>{title}</Title>
             <Amount>{amount}</Amount>
         </Container>

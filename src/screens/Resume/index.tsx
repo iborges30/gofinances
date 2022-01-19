@@ -21,7 +21,7 @@ interface CategoryData {
 }
 
 export function Resume() {
-  const [totalByCategories, setTotalByCategories] = useState<CategoryData>([]);
+  const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
 
   async function loadData() {
     const dataKey = "@gofinances:transactions";
@@ -57,6 +57,7 @@ export function Resume() {
         });
       }
     });
+    setTotalByCategories(totalByCategory);
   }
 
   useEffect(() => {
